@@ -3,7 +3,7 @@
 export default function Services() {
   return (
     <section>
-      <h1>Pagina Dashboard</h1>
+      <h1>Pagina Services</h1>
     </section>
   )
 }
