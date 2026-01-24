@@ -36,7 +36,7 @@ import { ArrowRight } from 'lucide-react'
 import imgTest from '../../../../../../public/foto1.png'
 import { cn } from '@/lib/utils'
 import { Prisma } from '@prisma/client'
-
+import { updateProfile } from '../_actions/update-profile'
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
@@ -103,7 +103,17 @@ export function ProfileContent({ user }: ProfileContentProps) {
       ...values,
       times: selectedHours
     }
-    console.log(profileData)
+
+    const response = await updateProfile({
+      name: values.name,
+      address: values.address,
+      status: values.status === 'active' ? true : false,
+      phone: values.phone,
+      timeZone: values.timeZone,
+      times: selectedHours || []
+
+    })
+
   }
 
 
@@ -119,7 +129,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
               <div className='flex justify-center'>
                 <div className='bg-gray-200 relative h-40 w-40 rounded-full overflow-hidden'>
                   <Image
-                    src={imgTest}
+                    src={user.image ? user.image : imgTest}
                     alt="Foto da clinica"
                     fill
                     className='object-cover'
