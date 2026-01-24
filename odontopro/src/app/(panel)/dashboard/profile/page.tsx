@@ -1,9 +1,26 @@
+import getSesion from '@/lib/getSession'
+import { redirect } from 'next/navigation'
+import { getUserData } from './_data-acess/get-info-user'
+
+export default async function Profile() {
+  const session = await getSesion()
+
+  if (!session) {
+    redirect("/")
+  }
 
 
-export default function Profile() {
+  const user = await getUserData({ userId: session.user?.id })
+  console.log("getUserData: ", user)
+
+
+  if (!user) {
+    redirect("/")
+  }
+
   return (
     <section>
-      <h1>Pagina perfil</h1>
+      <h1>Página Perfil</h1>
     </section>
   )
 }
