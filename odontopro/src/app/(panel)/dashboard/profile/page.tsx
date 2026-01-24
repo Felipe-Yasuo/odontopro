@@ -1,6 +1,7 @@
 import getSesion from '@/lib/getSession'
 import { redirect } from 'next/navigation'
-import { getUserData } from './_data-acess/get-info-user'
+import { getUserData } from './_data-access/get-info-user'
+import { ProfileContent } from './_components/profile'
 
 export default async function Profile() {
   const session = await getSesion()
@@ -19,8 +20,6 @@ export default async function Profile() {
   }
 
   return (
-    <section>
-      <h1>Página Perfil</h1>
-    </section>
+    <ProfileContent />
   )
 }
