@@ -37,6 +37,8 @@ import imgTest from '../../../../../../public/foto1.png'
 import { cn } from '@/lib/utils'
 import { Prisma } from '@prisma/client'
 import { updateProfile } from '../_actions/update-profile'
+import { toast } from 'sonner'
+import { formatPhone } from '@/utils/formatPhone'
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
@@ -45,14 +47,10 @@ type UserWithSubscription = Prisma.UserGetPayload<{
 }>
 
 interface ProfileContentProps {
-  user: UserWithSubscription
+  user: UserWithSubscription;
 }
 
 export function ProfileContent({ user }: ProfileContentProps) {
-
-
-  console.log(user)
-
   const [selectedHours, setSelectedHours] = useState<string[]>(user.times ?? [])
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
@@ -99,11 +97,6 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
   async function onSubmit(values: ProfileFormData) {
 
-    const profileData = {
-      ...values,
-      times: selectedHours
-    }
-
     const response = await updateProfile({
       name: values.name,
       address: values.address,
@@ -111,9 +104,14 @@ export function ProfileContent({ user }: ProfileContentProps) {
       phone: values.phone,
       timeZone: values.timeZone,
       times: selectedHours || []
-
     })
 
+    if (response.error) {
+      toast.error(response.error)
+      return;
+    }
+
+    toast.success(response.data)
   }
 
 
@@ -186,7 +184,11 @@ export function ProfileContent({ user }: ProfileContentProps) {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder='Digite o telefone...'
+                          placeholder='(67) 99912-3456'
+                          onChange={(e) => {
+                            const formattedValue = formatPhone(e.target.value)
+                            field.onChange(formattedValue)
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
