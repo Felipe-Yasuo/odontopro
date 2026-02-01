@@ -10,10 +10,7 @@ export default async function Profile() {
     redirect("/")
   }
 
-
   const user = await getUserData({ userId: session.user?.id })
-  console.log("getUserData: ", user)
-
 
   if (!user) {
     redirect("/")
