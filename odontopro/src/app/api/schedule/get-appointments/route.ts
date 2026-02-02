@@ -1,0 +1,15 @@
+// Backend meusite.com/api/schedule/get-appointments
+
+import prisma from '@/lib/prisma'
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function GET(request: NextRequest) {
+  // Buscar se tem agendamentos (appointments) em uma data especifica de uma clinica.
+
+  // Quais horarios estão reservados.
+
+  return NextResponse.json({
+    ok: true
+  })
+
+}
