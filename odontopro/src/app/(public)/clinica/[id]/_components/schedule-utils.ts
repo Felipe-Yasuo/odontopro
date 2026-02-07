@@ -29,3 +29,28 @@ export function isSlotInThePast(slotTime: string) {
   return false;
 
 }
+
+
+export function isSlotSequenceAvailable(
+  startSlot: string, //> Primeiro horario disponivel
+  requiredSlots: number, //> Quantidade de slots necessários
+  allSlots: string[], //> Todos horarios da clinica
+  blockedSlots: string[] //> Horarios bloqueados
+) {
+
+  const startIndex = allSlots.indexOf(startSlot)
+  if (startIndex === -1 || startIndex + requiredSlots > allSlots.length) {
+    return false;
+  }
+
+
+  for (let i = startIndex; i < startIndex + requiredSlots; i++) {
+    const slotTime = allSlots[i]
+
+    if (blockedSlots.includes(slotTime)) {
+      return false;
+    }
+  }
+
+  return true;
+}
