@@ -55,8 +55,9 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
       const dateString = date.toISOString().split("T")[0]
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/schedule/get-appointments?userId=${clinic.id}&date=${dateString}`)
 
-      return []
-
+      const json = await response.json();
+      setLoadingSlots(false);
+      return json; // Retornar o array com horarios que já tem bloqueado desse Dia e dessa clinica.
 
     } catch (err) {
       console.log(err)
@@ -70,12 +71,21 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
     if (selectedDate) {
       fetchBlockedTimes(selectedDate).then((blocked) => {
-        console.log("Horarios reservados:", blocked)
+        setBlockedTimes(blocked)
+
+        const times = clinic.times || [];
+
+        const finalSlots = times.map((time) => ({
+          time: time,
+          available: !blocked.includes(time)
+        }))
+
+        setAvailableTimeSlots(finalSlots)
+
       })
     }
 
   }, [selectedDate, clinic.times, fetchBlockedTimes, selectedTime])
-
 
   async function handleRegisterAppointmnent(formData: AppointmentFormData) {
     console.log(formData)
