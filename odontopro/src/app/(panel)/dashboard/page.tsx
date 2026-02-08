@@ -4,7 +4,7 @@ import { Calendar } from 'lucide-react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { ButtonCopyLink } from './_components/button-copy-link'
-import { Reminders } from './_components/reminders'
+import { Reminders } from './_components/reminder/reminders'
 
 export default async function Dashboard() {
   const session = await getSesion()
@@ -21,7 +21,7 @@ export default async function Dashboard() {
           href={`/clinica/${session.user?.id}`}
           target='_blank'
         >
-          <Button className='bg-emerald-500 hover:bg-emerald-400 flex-1 md:flex-[0]'>
+          <Button className='bg-emerald-500 hover:bg-emerald-400 flex-1 md:flex-0'>
             <Calendar className='w-5 h-5' />
             <span>Novo agendamento</span>
           </Button>
