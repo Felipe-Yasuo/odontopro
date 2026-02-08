@@ -55,14 +55,17 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
 
       return json
 
-    }
+    },
+    staleTime: 20000, // 20 segundos
+    refetchInterval: 60000, // 60 segundos
   })
+
 
   const occupantMap: Record<string, AppointmentWithService> = {}
 
-
   if (data && data.length > 0) {
     for (const appointment of data) {
+
       const requiredSlots = Math.ceil(appointment.service.duration / 30);
 
       const startIndex = times.indexOf(appointment.time)
