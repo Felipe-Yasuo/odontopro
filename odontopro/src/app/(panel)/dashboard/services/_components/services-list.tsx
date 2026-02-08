@@ -43,16 +43,26 @@ export function ServicesList({ services }: ServicesListProps) {
     }
 
     toast.success(response.data)
+
   }
+
 
   function handleEditService(service: Service) {
     setEditingService(service);
     setIsDialogOpen(true);
   }
 
-
   return (
-    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+    <Dialog
+      open={isDialogOpen}
+      onOpenChange={(open) => {
+        setIsDialogOpen(open);
+
+        if (!open) {
+          setEditingService(null);
+        }
+      }}
+    >
       <section className='mx-auto'>
 
         <Card>
@@ -69,7 +79,8 @@ export function ServicesList({ services }: ServicesListProps) {
                 e.preventDefault();
                 setIsDialogOpen(false);
                 setEditingService(null)
-              }}>
+              }}
+            >
               <DialogService
                 closeModal={() => {
                   setIsDialogOpen(false);
@@ -107,7 +118,7 @@ export function ServicesList({ services }: ServicesListProps) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => { handleEditService(service) }}
+                      onClick={() => handleEditService(service)}
                     >
                       <Pencil className='w-4 h-4' />
                     </Button>
