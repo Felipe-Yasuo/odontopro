@@ -22,6 +22,7 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { DialogAppointment } from './dialog-appointment'
+import { ButtonPickerAppointment } from './button-date'
 
 export type AppointmentWithService = Prisma.AppointmentGetPayload<{
   include: {
@@ -60,8 +61,6 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
 
       const json = await response.json() as AppointmentWithService[];
 
-      console.log(json);
-
       if (!response.ok) {
         return []
       }
@@ -69,8 +68,8 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
       return json
 
     },
-    staleTime: 20000,
-    refetchInterval: 60000,
+    staleTime: 20000, // 20 segundos
+    refetchInterval: 60000, // 60 segundos
   })
 
   const occupantMap: Record<string, AppointmentWithService> = {}
@@ -124,7 +123,7 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
             Agendamentos
           </CardTitle>
 
-          <button>SELECIONAR DATA</button>
+          <ButtonPickerAppointment />
         </CardHeader>
 
         <CardContent>
