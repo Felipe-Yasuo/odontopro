@@ -1,8 +1,19 @@
-export default function Plans() {
+import getSession from '@/lib/getSession'
+import { redirect } from 'next/navigation'
+import { GridPlans } from './_components/grid-plans'
+
+export default async function Plans() {
+  const session = await getSession()
+
+  if (!session) {
+    redirect("/")
+  }
+
   return (
     <div>
-      <h1>Pagina Planos</h1>
+
+      <GridPlans />
+
     </div>
   )
 }
-
