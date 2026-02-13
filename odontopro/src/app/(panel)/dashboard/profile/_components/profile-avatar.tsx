@@ -1,8 +1,9 @@
 "use client"
 import Image from 'next/image';
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import semFoto from '../../../../../../public/foto1.png'
-import { Upload } from 'lucide-react';
+import { Loader, Upload } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface AvatarProfileProps {
     avatarUrl: string | null;
@@ -11,6 +12,67 @@ interface AvatarProfileProps {
 
 export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
     const [previewImage, setPreviewImage] = useState(avatarUrl)
+    const [loading, setLoading] = useState(false);
+
+    async function handleChange(e: ChangeEvent<HTMLInputElement>) {
+        // (X) Criar o componente
+        // (X) Receber a imagem de troca.
+        // Enviar a imagem para o servidor (storage)
+        // Receber a url da imagem do servidor
+        // Salva a nova url da imagem no banco de dados
+
+        if (e.target.files && e.target.files[0]) {
+            setLoading(true);
+            const image = e.target.files[0];
+
+            if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
+                toast.error("Formato de imagem inválido");
+                return;
+            }
+
+
+            const newFilename = `${userId}`;
+            const newFile = new File([image], newFilename, { type: image.type })
+
+            const urlImage = await uploadImage(newFile)
+
+
+        }
+    }
+
+
+    async function uploadImage(image: File): Promise<string | null> {
+
+        try {
+            toast("Estamos enviando sua imagem...")
+
+            const formData = new FormData();
+
+            formData.append("file", image)
+            formData.append("userId", userId)
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/image/upload`, {
+                method: "POST",
+                body: formData
+            })
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                return null;
+            }
+
+            toast("Imagem alterada com sucesso!")
+            return data as string
+
+
+
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+
+    }
 
 
     return (
@@ -18,12 +80,13 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
 
             <div className='relative flex items-center justify-center w-full h-full '>
                 <span className='absolute cursor-pointer z-[2] bg-slate-50/80 p-2 rounded-full shadow-xl'>
-                    <Upload size={16} color="#131313" />
+                    {loading ? <Loader size={16} color="#131313" className='animate-spin' /> : <Upload size={16} color="#131313" />}
                 </span>
 
                 <input
                     type="file"
                     className='opacity-0 cursor-pointer relative z-50 w-48 h-48'
+                    onChange={handleChange}
                 />
             </div>
 
