@@ -36,6 +36,12 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
 
             const urlImage = await uploadImage(newFile)
 
+            if (urlImage) {
+                setPreviewImage(urlImage);
+            }
+
+            setLoading(false);
+
 
         }
     }
@@ -63,8 +69,7 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
             }
 
             toast("Imagem alterada com sucesso!")
-            return data as string
-
+            return data.secure_url as string
 
 
         } catch (err) {
@@ -79,7 +84,7 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
         <div className="relative w-40 h-40 md:w-48 md:h-48">
 
             <div className='relative flex items-center justify-center w-full h-full '>
-                <span className='absolute cursor-pointer z-[2] bg-slate-50/80 p-2 rounded-full shadow-xl'>
+                <span className='absolute cursor-pointer z-2 bg-slate-50/80 p-2 rounded-full shadow-xl'>
                     {loading ? <Loader size={16} color="#131313" className='animate-spin' /> : <Upload size={16} color="#131313" />}
                 </span>
 
