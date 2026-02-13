@@ -1,111 +1,91 @@
-Aqui está o README final pronto para você colar no projeto 👇
+<h1 align="center">🦷 Odonto Pro</h1>
 
-🦷 Odonto Pro
+<p align="center">
+SaaS completo para clínicas odontológicas com sistema de agendamento e assinatura online.
+</p>
 
-SaaS completo para clínicas odontológicas, permitindo gerenciamento de agendamentos, autenticação de usuários e sistema de assinatura via Stripe.
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black" />
+  <img src="https://img.shields.io/badge/React-19-blue" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6" />
+  <img src="https://img.shields.io/badge/Stripe-SaaS-purple" />
+  <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow" />
+</p>
 
-Projeto desenvolvido durante o curso:
+---
 
-Desenvolver um SaaS do zero ao profissional com Next JS, TypeScript, Banco de dados, Stripe pagamentos – Matheus Fraga
+## 🚀 Stack Tecnológica
 
-🚀 Tecnologias Utilizadas
-Frontend
+### 🖥️ Frontend
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Radix UI
+- React Hook Form
+- Zod
+- TanStack React Query
+- Lucide React
+- Sonner
 
-Next.js 16 (App Router)
+### ⚙️ Backend
+- Next.js API Routes
+- NextAuth v5
+- Prisma ORM
+- PostgreSQL
+- Stripe (Checkout + Webhooks)
 
-React 19
+### ☁️ Serviços
+- Neon (PostgreSQL Hosting)
+- Cloudinary (Upload de imagens)
 
-TypeScript
+---
 
-Tailwind CSS 4
+## ✨ Funcionalidades
 
-Radix UI
+- 🔐 Login com Google e GitHub
+- 👤 Autenticação segura com NextAuth
+- 📅 Sistema completo de agendamento
+- 💳 Assinatura (Plano Básico e Profissional)
+- 📡 Webhooks Stripe para confirmação de pagamento
+- 📂 Upload de imagens
+- ⚡ Cache inteligente com React Query
 
-React Hook Form
+---
 
-Zod
+## 🏗️ Arquitetura
 
-TanStack React Query
+- App Router (Next.js)
+- API Routes para backend
+- Prisma como camada de acesso ao banco
+- Stripe Webhooks para sincronização de pagamentos
+- Validação com Zod
+- Organização modular por features
 
-Lucide React
+---
 
-Sonner
+## ⚙️ Como rodar o projeto
 
-Backend
-
-Next.js API Routes
-
-NextAuth v5
-
-Prisma ORM
-
-PostgreSQL
-
-Stripe (Checkout + Webhooks)
-
-Serviços Externos
-
-Neon (Banco PostgreSQL)
-
-Cloudinary (Upload de imagens)
-
-✨ Funcionalidades
-
-🔐 Login com Google e GitHub
-
-👤 Sistema de autenticação com NextAuth
-
-📅 Agendamento de consultas
-
-💳 Sistema de assinatura (Plano Básico e Profissional)
-
-📡 Integração com Stripe Webhooks
-
-📂 Upload de imagens com Cloudinary
-
-⚡ Cache e sincronização com React Query
-
-🏗️ Arquitetura
-
-App Router (Next.js)
-
-API Routes para backend
-
-Prisma como ORM
-
-Stripe Webhooks para confirmação de pagamento
-
-Validação com Zod
-
-Gerenciamento de estado com React Query
-
-Estrutura organizada por features
-
-⚙️ Como rodar o projeto
-# Clone o repositório
+```bash
 git clone https://github.com/seuusuario/odontopro
+cd odontopro
 
-# Instale as dependências
 npm install
 
-# Gere o Prisma Client
 npx prisma generate
-
-# Rode as migrations
 npx prisma migrate deploy
 
-# Inicie o projeto
 npm run dev
+Para testar webhooks localmente:
 
-
-Para testar webhooks do Stripe localmente:
-
+bash
+Copiar código
 npm run stripe:listen
-
 🔐 Variáveis de Ambiente
+Crie um arquivo .env:
 
-Crie um arquivo .env na raiz do projeto:
-
+env
+Copiar código
 DATABASE_URL=
 
 AUTH_SECRET=
@@ -127,31 +107,26 @@ STRIPE_CANCEL_URL=
 CLOUDINARY_NAME=
 CLOUDINARY_KEY=
 CLOUDINARY_SECRET=
-
-
+⚠️ Nunca compartilhe valores reais dessas variáveis.
 
 📚 Aprendizados
+Construção de SaaS real do zero
 
-Desenvolvimento de SaaS completo
-
-Integração com Stripe (Checkout e Webhooks)
+Integração completa com Stripe (Checkout + Webhooks)
 
 Autenticação moderna com NextAuth v5
 
 Modelagem relacional com Prisma
 
-Validação com Zod
-
-Organização Full-Stack com Next.js
+Validação robusta com Zod
 
 Gerenciamento de estado server/client
 
-🔮 Melhorias Futuras
+🔮 Roadmap
+📊 Dashboard com métricas
 
-Dashboard administrativo com métricas
+🧪 Testes automatizados
 
-Sistema de notificações
+📧 Sistema de notificações
 
-Testes automatizados
-
-Deploy com CI/CD
+🚀 Deploy com CI/CD
