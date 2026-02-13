@@ -69,6 +69,29 @@ Projeto desenvolvido durante o curso <strong>
 - Organização modular por features
 
 ---
+## 📚 Aprendizados
+Construção de SaaS real do zero
+
+Integração completa com Stripe (Checkout + Webhooks)
+
+Autenticação moderna com NextAuth v5
+
+Modelagem relacional com Prisma
+
+Validação robusta com Zod
+
+Gerenciamento de estado server/client
+---
+🔮 Roadmap
+📊 Dashboard com métricas
+
+🧪 Testes automatizados
+
+📧 Sistema de notificações
+
+🚀 Deploy com CI/CD
+
+---
 
 ## ⚙️ Como rodar o projeto
 
@@ -84,9 +107,8 @@ npx prisma migrate deploy
 npm run dev
 Para testar webhooks localmente:
 
-bash
-Copiar código
 npm run stripe:listen
+
 🔐 Variáveis de Ambiente
 Crie um arquivo .env:
 
@@ -113,26 +135,3 @@ STRIPE_CANCEL_URL=
 CLOUDINARY_NAME=
 CLOUDINARY_KEY=
 CLOUDINARY_SECRET=
-⚠️ Nunca compartilhe valores reais dessas variáveis.
-
-📚 Aprendizados
-Construção de SaaS real do zero
-
-Integração completa com Stripe (Checkout + Webhooks)
-
-Autenticação moderna com NextAuth v5
-
-Modelagem relacional com Prisma
-
-Validação robusta com Zod
-
-Gerenciamento de estado server/client
-
-🔮 Roadmap
-📊 Dashboard com métricas
-
-🧪 Testes automatizados
-
-📧 Sistema de notificações
-
-🚀 Deploy com CI/CD
