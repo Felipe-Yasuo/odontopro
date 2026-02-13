@@ -5,6 +5,12 @@ SaaS completo para clínicas odontológicas com sistema de agendamento e assinat
 </p>
 
 <p align="center">
+Projeto desenvolvido durante o curso <strong>
+“Desenvolver um SaaS do zero ao profissional com Next.js, TypeScript, Banco de dados e Stripe”
+</strong> – Matheus Fraga.
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Next.js-16-black" />
   <img src="https://img.shields.io/badge/React-19-blue" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6" />
