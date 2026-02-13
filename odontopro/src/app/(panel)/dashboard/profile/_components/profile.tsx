@@ -39,8 +39,9 @@ import { Prisma } from '@prisma/client'
 import { updateProfile } from '../_actions/update-profile'
 import { toast } from 'sonner'
 import { formatPhone } from '@/utils/formatPhone'
-import { useSession, signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { AvatarProfile } from './profile-avatar'
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
@@ -57,8 +58,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
   const router = useRouter();
   const [selectedHours, setSelectedHours] = useState<string[]>(user.times ?? [])
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
-  const { update } = useSession()
-
+  const { update } = useSession();
 
   const form = useProfileForm({
     name: user.name,
@@ -102,7 +102,6 @@ export function ProfileContent({ user }: ProfileContentProps) {
   );
 
   async function onSubmit(values: ProfileFormData) {
-
     const response = await updateProfile({
       name: values.name,
       address: values.address,
@@ -119,7 +118,6 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
     toast.success(response.data)
   }
-
 
   async function handleLogout() {
     await signOut();
@@ -138,14 +136,10 @@ export function ProfileContent({ user }: ProfileContentProps) {
             </CardHeader>
             <CardContent className='space-y-6'>
               <div className='flex justify-center'>
-                <div className='bg-gray-200 relative h-40 w-40 rounded-full overflow-hidden'>
-                  <Image
-                    src={user.image ? user.image : imgTest}
-                    alt="Foto da clinica"
-                    fill
-                    className='object-cover'
-                  />
-                </div>
+                <AvatarProfile
+                  avatarUrl={user.image}
+                  userId={user.id}
+                />
               </div>
 
               <div className='space-y-4'>
@@ -335,14 +329,14 @@ export function ProfileContent({ user }: ProfileContentProps) {
         </form>
       </Form>
 
-      <section className="mt-4">
+      <section className='mt-4'>
         <Button
           variant="destructive"
-          onClick={handleLogout}>
+          onClick={handleLogout}
+        >
           Sair da conta
         </Button>
       </section>
-
     </div>
   )
 }
